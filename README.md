@@ -1,5 +1,7 @@
+<p float="left">
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Breezeicons-apps-48-cmake.svg/1200px-Breezeicons-apps-48-cmake.svg.png" height="110"/>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Cython-logo.svg/1200px-Cython-logo.svg.png" height="100"/>
+</p>
 
 # Cython-Cmake-Template
 [![GitHub license](https://img.shields.io/github/license/TheClockTwister/Cython-Cmake-Template)](https://github.com/TheClockTwister/Cython-Cmake-Template/blob/master/LICENSE.md)
