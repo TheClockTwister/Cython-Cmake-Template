@@ -18,7 +18,7 @@
 # print(time() - start)
 
 
-from cython_vector.foobar import print_stuff, test_the_list
+from nice_module.foobar import print_stuff, test_the_list
 
-print_stuff("ÖÄÜüäö€@~")
+print_stuff("Some text to show that it works :)")
 test_the_list([1, 4, 5.5, 2])
