@@ -7,7 +7,7 @@ project(vectors_cpp)
 if (UNIX)
     add_custom_target(
             preparation
-            COMMAND echo "Removing old distribution files" && rm -Rf ${CMAKE_SOURCE_DIR}/dist/*
+            COMMAND rm -Rf ${CMAKE_SOURCE_DIR}/dist/*
     )
 else ()
     string(REPLACE / \\ WINDOWS_SOURCE_DIR ${CMAKE_SOURCE_DIR})
