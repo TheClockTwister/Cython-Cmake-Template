@@ -1,7 +1,16 @@
+# JetBrains IDEs
+.idea/
+
+# local cmake builds by CLion (IDE)
+**/cmake-build-*/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+
+# C++ files created from build
+nice_module/**/*.cpp
 
 # C extensions
 *.so
