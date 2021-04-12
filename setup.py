@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 from distutils.extension import Extension
 from Cython.Build import cythonize
 from os.path import normpath, join
@@ -10,7 +10,18 @@ def make_module(
         c_libraries: list = None
 ):
     """ Generates the extensions for given Cython source files and C/C++
-    source files or pre-compiled C/C++ libraries"""
+    source files or pre-compiled C/C++ libraries and normalizes paths
+
+    Arguments:
+        submodule_name (str): Name of the extension module that is to be built (may include ".")
+        cython_src_files (List[str]): `.pyx` files to include during submodule compilation
+        c_include_paths (List[str]): Directories where to look for `.h` files from external C/C++ code
+        c_src_paths (List[str]): Directories where to look for implementations and libraries (`.cpp`, `.lib`)
+        c_libraries (List[str]): Names of libraries to link against (`.lib`)
+
+    Returns:
+        Extension: Extension object for setup(cythonize([...]))
+    """
 
     if c_include_paths is None: c_include_paths = []
     if c_libraries is None: c_libraries = []
@@ -25,16 +36,6 @@ def make_module(
     )
 
 
-# examples_extension = Extension(
-#     name=".".join([module_name, "vectors"]),  # creates "vectors" module in "cython_vector/"
-#     sources=[
-#         normpath('cython_vector/vectors.pyx')
-#     ],
-#     # libraries=["kacken"],
-#     # library_dirs=[normpath('project/src/a')],
-#     # include_dirs=[normpath('project/src/include')]
-# )
-
 module_name = "nice_module"
 
 setup(
@@ -43,7 +44,7 @@ setup(
     ext_modules=cythonize([
         make_module(
             "foobar", ["nice_module/foobar.pyx"],
-            c_src_paths=["cpp_code/dist"],  # path to the vectors_cpp.lib (static C++ library)
+            c_src_paths=["cpp_code/dist"],
             c_include_paths=["cpp_code/include"],
             c_libraries=["foobar"]
         )
