@@ -9,6 +9,13 @@ if (UNIX)
             preparation
             COMMAND rm -Rf ${CMAKE_SOURCE_DIR}/dist/*
     )
+
+    set(CMAKE_CXX_FLAGS " ${CMAKE_CXX_FLAGS_INIT} -std=c++11 -fPIC")
+    set(CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG")
+    set(CMAKE_CXX_FLAGS_MINSIZEREL "-Os -DNDEBUG")
+    set(CMAKE_CXX_FLAGS_RELEASE "-O4 -DNDEBUG")
+    set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g -DDEBUG")
+
 else ()
     string(REPLACE / \\ WINDOWS_SOURCE_DIR ${CMAKE_SOURCE_DIR})
     add_custom_target(

@@ -5,15 +5,19 @@ on:
   push:
 
 jobs:
-  windows:
-    name: "Windows Build (amd64)"
+  wheel_build:
+    name: "Wheel Build"
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            generator: "Unix Makefiles"
+          - os: windows-latest
+            generator: "NMake Makefiles"
+
     runs-on: ${{ matrix.os }}
     env:
       working-directory: ./
-    strategy:
-      matrix:
-        os: [ "windows-2019" ]
-
     steps:
       - uses: actions/checkout@v2
 
@@ -22,14 +26,21 @@ jobs:
           python-version: '3.8'
           architecture: 'x64'
 
-      - uses: ilammy/msvc-dev-cmd@v1
+      - name: Install MSVC
+        if: ${{ matrix.os == 'windows-latest' }}
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Install build-essentials
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: sudo apt install -y build-essential g++
 
       - name: Build C++ libraries
         working-directory: ${{env.working-directory}}/cpp_code
         run: |
           mkdir build
           cd build
-          cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release ..
+          echo '-G "${{matrix.generator}}"'
+          cmake -G "${{matrix.generator}}" -DCMAKE_BUILD_TYPE=Release ..
           cmake --build . --config Release
 
       - name: Install pip dependencies
@@ -46,5 +57,5 @@ jobs:
       - name: Upload wheel artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: wheel-win-amd64
+          name: wheel-${{ matrix.os }}
           path: dist/*.whl
