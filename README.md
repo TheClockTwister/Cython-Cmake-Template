@@ -1,6 +1,14 @@
 # Cython-Cmake-Template
 
-A template for Python package generation with pre-compiled C/C++ modules using Cmake and Cython
+A template for Python package generation with pre-compiled C/C++ modules using
+[Cmake](https://cmake.org/cmake/help/latest/) and [Cython](https://cython.readthedocs.io/en/latest/index.html)
+
+## Features
+
+- Easy and cross-platform C/C++ build system with [Cmake](https://cmake.org/cmake/help/latest/)
+- Example config for auto-build with [GitHub Actions](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstrategy) CI
+- Examples for a basic static library C++ project
+- Examples for Python stub files (`.pyi` type hints)
 
 ## Getting Started
 
@@ -20,7 +28,7 @@ A template for Python package generation with pre-compiled C/C++ modules using C
 ### Build
 
 - Build your static C/C++ library using Cmake ([what is a static library?](https://www.geeksforgeeks.org/difference-between-static-and-shared-libraries/)):
-    ```bash
+  ```bash
   mkdir build
   cd build
   cmake -DCMAKE_BUILD_TYPE=Release ..
